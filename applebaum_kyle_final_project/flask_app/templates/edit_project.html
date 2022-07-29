@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+    <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+        <div class="container-fluid">
+            <h1 class="text-info fw-bold fst-italic">PROJEX</h1>
+            <h4 class="text-end">Welcome {{user.first_name}} {{user.last_name}}!</h4>
+            <div>
+                <a href="/dashboard" class="btn btn-info btn-outline-dark my-3 border-2 rounded-pill">Home</a>
+                <a href="/logout" class="btn btn-info btn-outline-dark m-3 border-2 rounded-pill">Logout</a>
+
+            </div>
+        </div>
+    </nav>
+<body>
+    <div class="container-md shadow-lg col-6 mx-auto bg-secondary text-center text-dark my-5 py-4 rounded-3 border-2 border-dark">
+        <h1>Edit Project</h1>
+                <form action="/project/update" class="col-8 offset-2 justify-center text-dark fw-bold p-2 rounded-3" method="post">
+                    <input type="hidden" name="id" value={{project.id}}>
+                    <div class="form-group py-2">
+                        <label for="name" class="form-label">Project Name</label>
+                        <input type="text" name="name" placeholder="{{project.name}}" class="form-control border-2 border-dark">
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="descriptions" class="form-label">Description</label>
+                        <textarea name="description" placeholder="{{project.description}}" class="form-control border-2 border-dark" rows="3"></textarea>
+                    </div>
+                    
+                    <input type="submit" value="Update" class="btn btn-info btn-outline-dark mt-3 border-2 rounded-pill">
+                    <a href="/project/{{project.id}}" class="btn btn-info btn-outline-dark mt-3 border-2 rounded-pill">Back</a>
+
+                    {% with messages = get_flashed_messages(category_filter=['project']) %}
+                        {% if messages %} 
+                            {% for message in messages %} 
+                                <p class="text-warning">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </form>
+    </div>
+</body>
+</html>
